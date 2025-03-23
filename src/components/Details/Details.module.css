@@ -1,0 +1,16 @@
+.allInfoFilm {
+  display: flex;
+  gap: 32px;
+}
+
+.textInfoFilm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.errorText {
+  color: red;
+  font-size: 32px;
+  text-align: center;
+}

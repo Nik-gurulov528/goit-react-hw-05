@@ -1,0 +1,30 @@
+.searchForm {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchField {
+  width: 700px;
+  padding: 8px 20px;
+  border-radius: 12px;
+}
+
+.submitBtn {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 12px 20px;
+  outline: none;
+  border: none;
+  border-radius: 16px;
+}
+
+.loadingText {
+  text-align: center;
+  font-size: 32px;
+}

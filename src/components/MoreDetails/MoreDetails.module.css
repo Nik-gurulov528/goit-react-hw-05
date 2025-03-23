@@ -1,0 +1,21 @@
+.reviewItem {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.castCollection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.castItem {
+  background-color: #a3a3a3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+}

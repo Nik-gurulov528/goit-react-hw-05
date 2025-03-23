@@ -1,0 +1,12 @@
+.topHeader {
+  box-shadow: 0 5px 5px #4a4a4a;
+  padding: 20px 44px;
+  top: 0;
+  width: 100%;
+}
+
+.headerLink {
+  color: #000000;
+  margin-right: 20px;
+  font-weight: 500;
+}
