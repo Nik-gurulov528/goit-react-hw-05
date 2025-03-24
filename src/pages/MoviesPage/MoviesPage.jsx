@@ -1,18 +1,22 @@
 import { Formik, Form, Field } from 'formik';
-import css from './Movies.module.css';
+import css from './MoviesPage.module.css';
 import { useId, useState, lazy, Suspense } from 'react';
 // import fetchFormData from '../../js/fetchFormData';
 import fetchData from '../../js/fetchData';
-const CurrentTrends = lazy(() =>
-  import('./../../components/CurrentTrends/CurrentTrends')
-);
+const MovieList = lazy(() => import('../../components/MovieList/MovieList'));
 
-export default function Movies() {
+export default function MoviesPage() {
   const inputId = useId();
   const [movies, setMovies] = useState({});
+  const [isError, setIsError] = useState(false);
 
   function handleSubmit(values) {
-    fetchData('form', values.searchStr).then(data => setMovies(data.results));
+    try {
+      setIsError(false);
+      fetchData('form', values.searchStr).then(data => setMovies(data.results));
+    } catch {
+      setIsError(true);
+    }
   }
 
   return (
@@ -34,11 +38,15 @@ export default function Movies() {
           </button>
         </Form>
       </Formik>
-      <Suspense fallback={<p className={css.loadingText}>Loading...</p>}>
-        {movies.length && (
-          <CurrentTrends info={movies} tag="Movies with similar title" />
-        )}
-      </Suspense>
+      {!isError ? (
+        <Suspense fallback={<p className={css.loadingText}>Loading...</p>}>
+          {movies.length && (
+            <MovieList info={movies} tag="Movies with similar title" />
+          )}
+        </Suspense>
+      ) : (
+        <p>Oops, sorry, something went wrong!</p>
+      )}
     </>
   );
 }

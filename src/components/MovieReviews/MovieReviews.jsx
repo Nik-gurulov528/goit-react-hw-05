@@ -9,13 +9,23 @@ const MoreDetails = lazy(() =>
 export default function MovieReviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState({});
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
-    fetchData('reviews', movieId).then(data => setReviews(data));
+    try {
+      setIsError(false);
+      fetchData('reviews', movieId).then(data => setReviews(data));
+    } catch {
+      setIsError(true);
+    }
   }, [movieId]);
 
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <MoreDetails result={reviews} additionalInfo="reviews" />
-    </Suspense>
-  );
+  if (!isError) {
+    return (
+      <Suspense fallback={<p>Loading...</p>}>
+        <MoreDetails result={reviews} additionalInfo="reviews" />
+      </Suspense>
+    );
+  } else {
+    <p>Oops, sorry, something went wrong!</p>;
+  }
 }

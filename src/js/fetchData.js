@@ -37,6 +37,7 @@ export default async function fetchData(fetch, value) {
       return responce.data;
     } catch (error) {
       console.log(error);
+      throw Error;
     }
   };
 

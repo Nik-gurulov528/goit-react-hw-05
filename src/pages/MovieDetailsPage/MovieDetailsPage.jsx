@@ -1,13 +1,13 @@
 import { Outlet, useLocation, useParams } from 'react-router';
 // import fetchExactData from '../../js/fetchExactData';
 import fetchData from '../../js/fetchData';
-import css from './MovieDetails.module.css';
+import css from './MovieDetailsPage.module.css';
 import { Suspense, useState, lazy, useEffect } from 'react';
-const Details = lazy(() => import('./../../components/Details/Details'));
+const Details = lazy(() => import('../../components/Details/Details'));
 import { NavLink } from 'react-router';
 import BackBtn from '../../components/BackBtn/BackBtn';
 
-export default function MovieDetails() {
+export default function MovieDetailsPage() {
   const location = useLocation();
 
   const [filmData, setFilmData] = useState(() => {
@@ -20,21 +20,35 @@ export default function MovieDetails() {
 
     return {};
   });
+  const [isError, setisError] = useState(false);
 
   const { movieId } = useParams();
-  fetchData('exact', movieId).then(data => setFilmData(data));
+
+  useEffect(() => {
+    try {
+      setisError(false);
+      fetchData('exact', movieId).then(data => setFilmData(data));
+    } catch {
+      setisError(true);
+    }
+  }, [movieId]);
 
   useEffect(() => {
     const saveExavtData = JSON.stringify(filmData);
     sessionStorage.setItem('detailsAboutFilm', saveExavtData);
   }, [filmData]);
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <div className={css.detailWrapper}>
-        <BackBtn address={location.state} />
-        <Details filmData={filmData} />
-        <Outlet />
-      </div>
-    </Suspense>
-  );
+
+  if (!isError) {
+    return (
+      <Suspense fallback={<p>Loading...</p>}>
+        <div className={css.detailWrapper}>
+          <BackBtn address={location.state} />
+          <Details filmData={filmData} />
+          <Outlet />
+        </div>
+      </Suspense>
+    );
+  } else {
+    <p>Oops, sorry, something went wrong!</p>;
+  }
 }

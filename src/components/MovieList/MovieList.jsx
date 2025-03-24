@@ -1,7 +1,7 @@
-import css from './CurrentTrends.module.css';
+import css from './MovieList.module.css';
 import { NavLink, useLocation } from 'react-router';
 
-export default function CurrentTrends({ info, tag }) {
+export default function MovieList({ info, tag }) {
   const location = useLocation();
   try {
     return (
