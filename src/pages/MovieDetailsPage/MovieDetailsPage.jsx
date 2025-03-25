@@ -2,13 +2,14 @@ import { Outlet, useLocation, useParams } from 'react-router';
 // import fetchExactData from '../../js/fetchExactData';
 import fetchData from '../../js/fetchData';
 import css from './MovieDetailsPage.module.css';
-import { Suspense, useState, lazy, useEffect } from 'react';
+import { Suspense, useState, lazy, useEffect, useRef } from 'react';
 const Details = lazy(() => import('../../components/Details/Details'));
 import { NavLink } from 'react-router';
-import BackBtn from '../../components/BackBtn/BackBtn';
+const BackBtn = lazy(() => import('./../../components/BackBtn/BackBtn'));
 
 export default function MovieDetailsPage() {
   const location = useLocation();
+  const prevLocation = useRef(location.state);
 
   const [filmData, setFilmData] = useState(() => {
     const exactGetData = sessionStorage.getItem('detailsAboutFilm');
@@ -42,7 +43,7 @@ export default function MovieDetailsPage() {
     return (
       <Suspense fallback={<p>Loading...</p>}>
         <div className={css.detailWrapper}>
-          <BackBtn address={location.state} />
+          <BackBtn address={prevLocation.current} />
           <Details filmData={filmData} />
           <Outlet />
         </div>
