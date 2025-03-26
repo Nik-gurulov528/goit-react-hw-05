@@ -29,7 +29,7 @@ export default async function fetchData(fetch, value) {
         url = `https://api.themoviedb.org/3/movie/${value}/credits?language=en-US`;
         break;
       default:
-        console.log('Invalid!');
+        url = null;
     }
 
     try {
@@ -37,7 +37,7 @@ export default async function fetchData(fetch, value) {
       return responce.data;
     } catch (error) {
       console.log(error);
-      throw Error;
+      return null;
     }
   };
 

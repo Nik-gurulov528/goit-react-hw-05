@@ -42,23 +42,34 @@ export default function MoviesPage() {
     return '';
   });
 
-  function handleSubmit(values) {
+  function handleSubmit(values, actions) {
     const update = new URLSearchParams(searchParams);
+    update.set('query', values.searchStr);
+    setQueryWord(values.searchStr);
+    setSearchParams(update);
+    actions.resetForm();
+  }
+
+  useEffect(() => {
     try {
       setIsLoading(true);
       setIsError(false);
-      fetchData('form', values.searchStr).then(data => setMovies(data.results));
-      update.set('query', values.searchStr);
+      fetchData('form', queryWord).then(data => setMovies(data.results));
     } catch {
       setIsError(true);
-      update.delete('query');
+      setMovies({});
     } finally {
-      setQueryWord(values.searchStr);
       setIsLoading(false);
+    }
+  }, [queryWord]);
+  useEffect(() => {
+    if (isError) {
+      const update = new URLSearchParams(searchParams);
+      update.delete('query');
+      setQueryWord('');
       setSearchParams(update);
     }
-  }
-
+  }, [isError]);
   useEffect(() => {
     const startURL = new URLSearchParams(searchParams);
     if (movies.length !== 0 && !isError) {
@@ -102,14 +113,14 @@ export default function MoviesPage() {
         </Form>
       </Formik>
       {isLoading && <p className={css.loadingText}>Loading...</p>}
-      {!isError ? (
+      {isError ? (
+        <p>Oops, sorry, something went wrong!</p>
+      ) : (
         <Suspense fallback={<p className={css.loadingText}>Loading...</p>}>
-          {movies.length && (
+          {movies.length !== 0 && (
             <MovieList info={movies} tag="Movies with similar title" />
           )}
         </Suspense>
-      ) : (
-        <p>Oops, sorry, something went wrong!</p>
       )}
     </>
   );
