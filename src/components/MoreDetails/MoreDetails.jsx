@@ -5,14 +5,14 @@ export default function MoreDetails({ result, additionalInfo }) {
     if (result.results && result.results.length !== 0) {
       return (
         <>
-          <h3>Reviews</h3>
+          <h3 className={css.moreInfoTitle}>Reviews</h3>
 
-          <ul>
+          <ul className={css.reviewList}>
             {result.results.map(item => (
               <li key={item.id} className={css.reviewItem}>
-                <h4>{item.author}</h4>
-                <p>{item.created_at}</p>
-                <p>{item.content}</p>
+                <h4 className={css.reviewItemInfo}>{item.author}</h4>
+                <p className={css.reviewItemInfo}>{item.created_at}</p>
+                <p className={css.reviewItemInfo}>{item.content}</p>
               </li>
             ))}
           </ul>
@@ -30,7 +30,7 @@ export default function MoreDetails({ result, additionalInfo }) {
     if (result.cast && result.cast.length !== 0) {
       return (
         <>
-          <h3>Cast</h3>
+          <h3 className={css.moreInfoTitle}>Cast</h3>
           <ul className={css.castCollection}>
             {result.cast.map(item => (
               <li key={item.id} className={css.castItem}>

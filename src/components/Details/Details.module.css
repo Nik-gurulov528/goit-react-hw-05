@@ -1,6 +1,11 @@
 .allInfoFilm {
   display: flex;
   gap: 32px;
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 12px;
+  max-width: 1250px;
+  margin: 0 auto;
 }
 
 .textInfoFilm {
@@ -13,4 +18,16 @@
   color: red;
   font-size: 32px;
   text-align: center;
+}
+
+.additionalInfo {
+  display: flex;
+  gap: 8px;
+}
+
+.additionalBtn {
+  padding: 4px 8px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 8px;
 }

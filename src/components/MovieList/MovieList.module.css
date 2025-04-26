@@ -5,6 +5,10 @@
   gap: 16px;
 }
 
+.trendingToday {
+  color: #ffffff;
+}
+
 .todayFilms {
   width: 100%;
   display: flex;
@@ -17,15 +21,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #b8b8b8;
+  background-color: #ffffff;
   border-radius: 5px;
   gap: 8px;
   padding: 8px;
   box-shadow: 0 5px 5px #4a4a4a;
 }
 
+.imgFilm {
+  margin: 0 auto;
+}
+
 .titleFilm {
   font-weight: 500;
+  color: #000000;
+  text-align: center;
+  margin-top: 8px;
 }
 
 .errorMessage {

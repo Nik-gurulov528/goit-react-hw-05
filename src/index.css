@@ -1,3 +1,13 @@
+body {
+  background: linear-gradient(
+    0deg,
+    rgba(49, 232, 214, 1) 0%,
+    rgba(114, 57, 184, 1) 33%,
+    rgba(114, 57, 184, 1) 67%,
+    rgba(49, 232, 214, 1) 100%
+  );
+}
+
 h1,
 h2,
 h3,

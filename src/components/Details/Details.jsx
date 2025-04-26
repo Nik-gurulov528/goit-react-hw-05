@@ -21,12 +21,16 @@ export default function Details({ filmData }) {
           </ul>
           <h2>Release Date</h2>
           <p>{filmData.release_date}</p>
-          <ul>
+          <ul className={css.additionalInfo}>
             <li>
-              <NavLink to="reviews">Reviews</NavLink>
+              <NavLink to="reviews" className={css.additionalBtn}>
+                Reviews
+              </NavLink>
             </li>
             <li>
-              <NavLink to="cast">Cast</NavLink>
+              <NavLink to="cast" className={css.additionalBtn}>
+                Cast
+              </NavLink>
             </li>
           </ul>
         </div>

@@ -13,7 +13,11 @@ export default function MovieList({ info, tag }) {
             return (
               <li key={item.id} className={css.itemToday}>
                 <NavLink to={`/movies/${item.id}`} state={location}>
-                  <img src={imageAddress} alt={item.original_title} />
+                  <img
+                    src={imageAddress}
+                    alt={item.original_title}
+                    className={css.imgFilm}
+                  />
                   <p className={css.titleFilm}>{item.title}</p>
                 </NavLink>
               </li>
